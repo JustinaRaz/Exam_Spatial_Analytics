@@ -1,0 +1,269 @@
+---
+title: "Raw_data_preprocessing"
+author: "Justina Razanauskaite"
+date: "2024-04-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Load packages:
+```{r}
+library(tidyverse)
+library(readr)
+```
+
+Setting working directory:
+```{r}
+setwd("/Users/justina/Desktop/Spatial_Analytics")
+```
+
+Cleaning CSVs for 2013:
+```{r}
+# ______________________________________________________________________________
+# Data part 1
+
+df_2013_1 <- read.csv("../data/to_clean/2013-bach-1.csv", 
+                      sep = ";", # specifying how to separate the columns of the data frame
+                      header = FALSE, # specifying that there are no headers
+                      col.names = c("municipality", "age", "origin", "n"), # giving headers names
+                      fileEncoding = "Windows-1252") # specification of symbol encoding - for Danish symbols
+
+# Removing columns that have 0 
+df_2013_1 <- df_2013_1[df_2013_1$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 2
+
+df_2013_2 <- read.csv("../data/to_clean/2013-bach-2.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2013_2 <- df_2013_2[df_2013_2$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 3
+
+df_2013_3 <- read.csv("../data/to_clean/2013-bach-3.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2013_3 <- df_2013_3[df_2013_3$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 4
+
+df_2013_4 <- read.csv("../data/to_clean/2013-bach-4.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2013_4 <- df_2013_4[df_2013_4$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 5
+
+df_2013_5 <- read.csv("../data/to_clean/2013-bach-5.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2013_5 <- df_2013_5[df_2013_5$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 6
+
+df_2013_6 <- read.csv("../data/to_clean/2013-bach-6.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2013_6 <- df_2013_6[df_2013_6$n != 0, ]
+```
+
+
+Combining all of the data to one grand 2013 data set:
+```{r}
+df_2013 <- rbind(df_2013_1, df_2013_2, df_2013_3, df_2013_4, df_2013_5, df_2013_6)
+
+# Remove rows that have "Denmark" in "origin" column:
+df_2013 <- df_2013[df_2013$origin != "Denmark", ]
+
+row.names(df_2013) <- NULL
+#df_2013
+```
+
+
+Saving the new 2013 csv for analysis part:
+```{r}
+write.csv(df_2013, "../data/mun_data_2013.csv")
+```
+
+
+Cleaning CSVs for 2023:
+```{r}
+# ______________________________________________________________________________
+# Data part 1
+
+df_2023_1 <- read.csv("../data/to_clean/2023-bach-1.csv", 
+                      sep = ";",
+                      header = FALSE,
+                      col.names = c("municipality", "age", "origin", "n"),
+                      fileEncoding = "Windows-1252")
+
+# Removing columns that have 0 
+df_2023_1 <- df_2023_1[df_2023_1$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 2
+
+df_2023_2 <- read.csv("../data/to_clean/2023-bach-2.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_2 <- df_2023_2[df_2023_2$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 3
+
+df_2023_3 <- read.csv("../data/to_clean/2023-bach-3.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_3 <- df_2023_3[df_2023_3$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 4
+
+df_2023_4 <- read.csv("../data/to_clean/2023-bach-4.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_4 <- df_2023_4[df_2023_4$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 5
+
+df_2023_5 <- read.csv("../data/to_clean/2023-bach-5.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_5 <- df_2023_5[df_2023_5$n != 0, ]
+
+# ______________________________________________________________________________
+# Data part 6
+
+# Data from the source seems to be odd, need to download the rest of the municipalities one by one, clean them and combine only at the end:
+
+#Hjorring
+df_2023_H <- read.csv("../data/to_clean/2023-H.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_H <- df_2023_H[df_2023_H$n != 0, ]
+
+#Jammerbugt
+df_2023_J <- read.csv("../data/to_clean/2023-J.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_J <- df_2023_J[df_2023_J$n != 0, ]
+
+# Laeso
+df_2023_L <- read.csv("../data/to_clean/2023-L.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_L <- df_2023_L[df_2023_L$n != 0, ]
+
+# Mariagerfjord
+df_2023_Ma <- read.csv("../data/to_clean/2023-Ma.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_Ma <- df_2023_Ma[df_2023_Ma$n != 0, ]
+
+# Morso
+df_2023_Mo <- read.csv("../data/to_clean/2023-Mo.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_Mo <- df_2023_Mo[df_2023_Mo$n != 0, ]
+
+# Thisted
+df_2023_T <- read.csv("../data/to_clean/2023-T.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_T <- df_2023_T[df_2023_T$n != 0, ]
+
+# Vesthimmerlands
+df_2023_V <- read.csv("../data/to_clean/2023-V.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_V <- df_2023_V[df_2023_V$n != 0, ]
+
+# Aalborg
+df_2023_A <- read.csv("../data/to_clean/2023-A.csv", 
+                      sep = ";", 
+                      header = FALSE, 
+                      col.names = c("municipality", "age", "origin", "n"), 
+                      fileEncoding = "Windows-1252")
+
+df_2023_A <- df_2023_A[df_2023_A$n != 0, ]
+```
+
+
+Combining all of the data to one grand 2013 data set:
+```{r}
+df_2023 <- rbind(df_2023_1, df_2023_2, df_2023_3, df_2023_4, df_2023_5, df_2013_6, df_2023_H, df_2023_J, df_2023_L, df_2023_Ma, df_2023_Mo, df_2023_T, df_2023_V, df_2023_A)
+
+# Remove rows that have "Denmark" in "origin" column:
+df_2023 <- df_2023[df_2023$origin != "Denmark", ]
+
+
+row.names(df_2023) <- NULL
+#df_2023
+```
+
+
+Saving the new 2023 csv for analysis part:
+```{r}
+write.csv(df_2023, "../data/mun_data_2023.csv")
+```
+
+
+
