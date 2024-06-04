@@ -25,3 +25,11 @@ In order to reproduce the analysis, you can clone the repository by opening the 
 ```
 git clone https://github.com/JustinaRaz/Exam_Spatial_Analytics.git
 ```
+Before doing so, make sure to set the directory of where the repository should be cloned to.
+
+Then:
+
+1. Unzip the folders that are currently zipped.
+2. Open R Studio, and set the working directory to the folder called "Spatial_Analytics".
+3. Open both .Rmd files, located in "RMD" folder.
+4. Run the code chunks.
