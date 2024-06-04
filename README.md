@@ -33,3 +33,7 @@ Then:
 2. Open R Studio, and set the working directory to the folder called "Spatial_Analytics".
 3. Open both .Rmd files, located in "RMD" folder.
 4. Run the code chunks.
+
+## Contacts
+
+If you have any questions, reach out to 202109601@post.au.dk.
