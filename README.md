@@ -18,4 +18,10 @@ An overview of files:
 | plots.zip  | Contains all of the plots generated during the analysis.|
 | preprocessing_data.Rmd  | Contains the code for preprocessing of the data. This file is included in "Spatial_Analytics.zip".|
 
+## To reproduce the analysis
 
+In order to reproduce the analysis, you can clone the repository by opening the terminal and running the following:
+
+```
+git clone https://github.com/JustinaRaz/Exam_Spatial_Analytics.git
+```
